@@ -1,0 +1,6 @@
+{
+  "name": "AMedia",
+  "description": "A modern premium social media platform with posts, 24-hour stories, real-time friend chat, blue tick verification, and a comprehensive Admin Panel dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

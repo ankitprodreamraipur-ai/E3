@@ -1,0 +1,377 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Public/private social media profile on AMedia without PII",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner UID or profile ID" },
+        "managedByUid": { "type": "string", "description": "Authenticated user UID managing this profile" },
+        "username": { "type": "string", "description": "Unique handle without @" },
+        "displayName": { "type": "string", "description": "Display name" },
+        "dob": { "type": "string", "description": "Date of birth string YYYY-MM-DD" },
+        "bio": { "type": "string", "description": "User biography" },
+        "avatarUrl": { "type": "string", "description": "Avatar preset key or URI" },
+        "isPrivate": { "type": "boolean", "description": "Whether account requires follow requests" },
+        "isVerified": { "type": "boolean", "description": "Whether account has blue verification badge" },
+        "isBanned": { "type": "boolean", "description": "Whether account is banned by admin" },
+        "accountStatus": { "type": "string", "enum": ["active", "banned"], "description": "Account status for discovery queries" },
+        "followersIds": { "type": "array", "description": "Bounded list of follower UIDs" },
+        "followingIds": { "type": "array", "description": "Bounded list of following UIDs" },
+        "savedPostIds": { "type": "array", "description": "Bounded list of saved post IDs" },
+        "postsCount": { "type": "integer", "description": "Number of posts" },
+        "followersCount": { "type": "integer", "description": "Number of followers" },
+        "followingCount": { "type": "integer", "description": "Number of following" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "userId",
+        "managedByUid",
+        "username",
+        "displayName",
+        "dob",
+        "bio",
+        "avatarUrl",
+        "isPrivate",
+        "isVerified",
+        "isBanned",
+        "accountStatus",
+        "followersIds",
+        "followingIds",
+        "savedPostIds",
+        "postsCount",
+        "followersCount",
+        "followingCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "Image post in AMedia feed",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string", "description": "Author profile ID" },
+        "managedByUid": { "type": "string", "description": "Authenticated user UID who created the post" },
+        "authorUsername": { "type": "string", "description": "Author username" },
+        "authorDisplayName": { "type": "string", "description": "Author display name" },
+        "authorAvatar": { "type": "string", "description": "Author avatar preset key" },
+        "authorIsVerified": { "type": "boolean", "description": "Whether author has blue tick" },
+        "caption": { "type": "string", "description": "Post caption" },
+        "imageUrl": { "type": "string", "description": "Post image preset or URI" },
+        "likedByIds": { "type": "array", "description": "Bounded list of UIDs who liked the post" },
+        "likesCount": { "type": "integer", "description": "Total likes count" },
+        "commentsCount": { "type": "integer", "description": "Total comments count" },
+        "sharesCount": { "type": "integer", "description": "Total shares count" },
+        "audienceIds": { "type": "array", "description": "Bounded list of follower UIDs allowed to see this post in their feed" },
+        "commentsPreview": { "type": "array", "description": "Bounded list of formatted comment strings" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "authorId",
+        "managedByUid",
+        "authorUsername",
+        "authorDisplayName",
+        "authorAvatar",
+        "authorIsVerified",
+        "caption",
+        "imageUrl",
+        "likedByIds",
+        "likesCount",
+        "commentsCount",
+        "sharesCount",
+        "audienceIds",
+        "commentsPreview",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "24-hour ephemeral story on AMedia",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string", "description": "Story creator ID" },
+        "managedByUid": { "type": "string", "description": "Authenticated user UID" },
+        "authorUsername": { "type": "string", "description": "Author username" },
+        "authorDisplayName": { "type": "string", "description": "Author display name" },
+        "authorAvatar": { "type": "string", "description": "Author avatar" },
+        "authorIsVerified": { "type": "boolean", "description": "Whether author is verified" },
+        "caption": { "type": "string", "description": "Story overlay caption" },
+        "imageUrl": { "type": "string", "description": "Story visual preset or URI" },
+        "viewerIds": { "type": "array", "description": "Bounded list of viewer UIDs" },
+        "audienceIds": { "type": "array", "description": "Bounded list of follower UIDs who can view the story" },
+        "expiresAtMillis": { "type": "integer", "description": "Epoch milliseconds when the 24h story expires" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "authorId",
+        "managedByUid",
+        "authorUsername",
+        "authorDisplayName",
+        "authorAvatar",
+        "authorIsVerified",
+        "caption",
+        "imageUrl",
+        "viewerIds",
+        "audienceIds",
+        "expiresAtMillis",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FollowRequest": {
+      "title": "FollowRequest",
+      "description": "Follow request for private accounts",
+      "type": "object",
+      "properties": {
+        "fromUserId": { "type": "string", "description": "Requester UID" },
+        "fromUsername": { "type": "string", "description": "Requester username" },
+        "fromDisplayName": { "type": "string", "description": "Requester display name" },
+        "fromAvatar": { "type": "string", "description": "Requester avatar" },
+        "toUserId": { "type": "string", "description": "Target private account ID" },
+        "toUsername": { "type": "string", "description": "Target username" },
+        "participantIds": { "type": "array", "description": "Bounded list of UIDs involved in the request" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "Request status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "fromUserId",
+        "fromUsername",
+        "fromDisplayName",
+        "fromAvatar",
+        "toUserId",
+        "toUsername",
+        "participantIds",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatThread": {
+      "title": "ChatThread",
+      "description": "Real-time friend chat thread",
+      "type": "object",
+      "properties": {
+        "participantIds": { "type": "array", "description": "Bounded list of participant UIDs" },
+        "peerId": { "type": "string", "description": "Friend profile ID" },
+        "peerUsername": { "type": "string", "description": "Friend username" },
+        "peerDisplayName": { "type": "string", "description": "Friend display name" },
+        "peerAvatar": { "type": "string", "description": "Friend avatar" },
+        "peerIsVerified": { "type": "boolean", "description": "Whether friend has blue tick" },
+        "lastMessage": { "type": "string", "description": "Latest message preview" },
+        "lastSenderId": { "type": "string", "description": "UID of last sender" },
+        "unreadCount": { "type": "integer", "description": "Unread message count" },
+        "isPeerTyping": { "type": "boolean", "description": "Real-time typing indicator" },
+        "lastSeenStatus": { "type": "string", "enum": ["sent", "delivered", "seen"], "description": "Delivery/seen status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "participantIds",
+        "peerId",
+        "peerUsername",
+        "peerDisplayName",
+        "peerAvatar",
+        "peerIsVerified",
+        "lastMessage",
+        "lastSenderId",
+        "unreadCount",
+        "isPeerTyping",
+        "lastSeenStatus",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Individual real-time message in a friend chat",
+      "type": "object",
+      "properties": {
+        "chatId": { "type": "string", "description": "Parent chat thread ID" },
+        "senderId": { "type": "string", "description": "Authenticated sender UID" },
+        "senderName": { "type": "string", "description": "Sender display name" },
+        "text": { "type": "string", "description": "Message body with emoji support" },
+        "seen": { "type": "boolean", "description": "Whether message has been seen" },
+        "participantIds": { "type": "array", "description": "Denormalized participant UIDs for flat security rule evaluation" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "chatId",
+        "senderId",
+        "senderName",
+        "text",
+        "seen",
+        "participantIds",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "Real-time notification for likes, comments, follows, requests, and broadcasts",
+      "type": "object",
+      "properties": {
+        "recipientId": { "type": "string", "description": "Target user UID" },
+        "senderId": { "type": "string", "description": "Actor UID" },
+        "senderUsername": { "type": "string", "description": "Actor username" },
+        "senderAvatar": { "type": "string", "description": "Actor avatar" },
+        "type": { "type": "string", "enum": ["like", "comment", "follow", "follow_request", "verification", "broadcast"], "description": "Notification type" },
+        "message": { "type": "string", "description": "Notification message text" },
+        "isRead": { "type": "boolean", "description": "Read status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "recipientId",
+        "senderId",
+        "senderUsername",
+        "senderAvatar",
+        "type",
+        "message",
+        "isRead",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "VerificationRequest": {
+      "title": "VerificationRequest",
+      "description": "Blue tick verification request reviewed in Admin Panel",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Target user profile ID" },
+        "managedByUid": { "type": "string", "description": "Authenticated user UID" },
+        "username": { "type": "string", "description": "Username" },
+        "displayName": { "type": "string", "description": "Display name" },
+        "avatarUrl": { "type": "string", "description": "Avatar preset" },
+        "category": { "type": "string", "description": "Verification category" },
+        "reason": { "type": "string", "description": "Justification for blue badge" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "Review status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "userId",
+        "managedByUid",
+        "username",
+        "displayName",
+        "avatarUrl",
+        "category",
+        "reason",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ModerationReport": {
+      "title": "ModerationReport",
+      "description": "User-submitted report or complaint managed in Admin Panel",
+      "type": "object",
+      "properties": {
+        "reporterId": { "type": "string", "description": "Authenticated reporter UID" },
+        "reporterUsername": { "type": "string", "description": "Reporter username" },
+        "targetId": { "type": "string", "description": "Reported resource ID" },
+        "targetType": { "type": "string", "enum": ["post", "story", "user"], "description": "Reported entity type" },
+        "targetSummary": { "type": "string", "description": "Summary of reported item" },
+        "reason": { "type": "string", "description": "Violation reason" },
+        "status": { "type": "string", "enum": ["pending", "under_review", "resolved", "dismissed"], "description": "Moderation status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "reporterId",
+        "reporterUsername",
+        "targetId",
+        "targetType",
+        "targetSummary",
+        "reason",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AdminActivityLog": {
+      "title": "AdminActivityLog",
+      "description": "Audit log of Admin Panel moderation and broadcast actions",
+      "type": "object",
+      "properties": {
+        "actorId": { "type": "string", "description": "Authenticated admin/actor UID" },
+        "actorName": { "type": "string", "description": "Actor display name" },
+        "actionType": { "type": "string", "enum": ["verify_user", "ban_user", "delete_user", "remove_post", "remove_story", "resolve_report", "broadcast"], "description": "Type of administrative action" },
+        "description": { "type": "string", "description": "Action details" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": [
+        "actorId",
+        "actorName",
+        "actionType",
+        "description",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Trusted admin role assignment document",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Admin UID" },
+        "role": { "type": "string", "enum": ["super_admin"], "description": "Admin role" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp" }
+      },
+      "required": ["userId", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profiles on AMedia"
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/entities/Post" },
+      "description": "Feed posts on AMedia"
+    },
+    "/stories/{storyId}": {
+      "schema": { "$ref": "#/entities/Story" },
+      "description": "24-hour disappearing stories on AMedia"
+    },
+    "/follow_requests/{requestId}": {
+      "schema": { "$ref": "#/entities/FollowRequest" },
+      "description": "Private account follow requests"
+    },
+    "/chats/{chatId}": {
+      "schema": { "$ref": "#/entities/ChatThread" },
+      "description": "Real-time friend chat threads"
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Real-time chat messages"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/AppNotification" },
+      "description": "Real-time user notifications and broadcasts"
+    },
+    "/verification_requests/{requestId}": {
+      "schema": { "$ref": "#/entities/VerificationRequest" },
+      "description": "Blue tick verification requests"
+    },
+    "/reports/{reportId}": {
+      "schema": { "$ref": "#/entities/ModerationReport" },
+      "description": "Content and user moderation reports"
+    },
+    "/activity_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AdminActivityLog" },
+      "description": "Admin Panel audit and activity logs"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Trusted administrator registry"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer rounded camera frame inside 66dp safe zone (21..87) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,26h32c6.6,0 12,5.4 12,12v32c0,6.6 -5.4,12 -12,12H38c-6.6,0 -12,-5.4 -12,-12V38C26,31.4 31.4,26 38,26zM38,32c-3.3,0 -6,2.7 -6,6v32c0,3.3 2.7,6 6,6h32c3.3,0 6,-2.7 6,-6V38c0,-3.3 -2.7,-6 -6,-6H38z" />
+    <!-- Center camera aperture ring -->
+    <path
+        android:fillColor="#08D9D6"
+        android:pathData="M54,40c7.7,0 14,6.3 14,14s-6.3,14 -14,14s-14,-6.3 -14,-14S46.3,40 54,40zM54,46c-4.4,0 -8,3.6 -8,8s3.6,8 8,8s8,-3.6 8,-8S58.4,46 54,46z" />
+    <!-- Top-right social spark dot -->
+    <path
+        android:fillColor="#FF2E63"
+        android:pathData="M69,39m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0" />
+</vector>
